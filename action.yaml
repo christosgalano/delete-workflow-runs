@@ -29,7 +29,7 @@ runs:
         TOKEN: ${{ inputs.token }}
         WORKFLOW: ${{ inputs.workflow }}
       run: |
-        ${{ github.action_path }}/delete_workflows_runs.sh \
+        ${{ github.action_path }}/delete_workflow_runs.sh \
           -o ${{ env.OWNER }} \
           -r ${{ env.REPO }} \
           -t ${{ env.TOKEN }} \
