@@ -1,14 +1,17 @@
-# delete-workflows-runs
+# delete-workflow-runs
 
-This action deletes all workflows' runs for a given repository.
+This action deletes the workflow runs for a given repository. You can delete the runs of a specific workflow or all the runs of the repository.
 
 ## Inputs
 
-| Name | Description | Required |
-| --- | --- | --- |
-| `owner` | Owner of the repository | true |
-| `name` | Name of the repository | true |
-| `token` | Token used to get and delete the workflows' runs | true |
+| Name | Description | Required | Default |
+| --- | --- | --- | --- |
+| `owner` | Owner of the repository | true | |
+| `name` | Name of the repository | true | |
+| `token` | Token used to get and delete the workflow' runs | true | |
+| `workflow` | Name of the workflow to delete its runs | false | all |
+
+The `workflow` input is optional. If no value is provided or the value provided is "all", then all the runs of the repository will be deleted.
 
 ## Permissions
 
@@ -17,25 +20,46 @@ The token provided must have the following permissions over the given repository
 - Read access to metadata
 - Read and Write access to actions
 
-## Example usage
+## Examples of usage
+
+### Delete all the runs of a repository
 
 ```yaml
-name: delete-workflows-runs
-on:
-  workflow_dispatch:
-    inputs:
-      repo_name:
-        description: "Specify the name of the repository"
-        required: true
-        type: string
+- uses: christosgalano/delete-workflow-runs@v1.0.0
+  with:
+    owner: ${{ inputs.repository_owner }}
+    repo: ${{ inputs.repository_name }}
+    token: ${{ secrets.workflow_PAT }}
+    # workflow: "all" can be omitted since it is the default value
+```
 
-jobs:
-  delete-workflows-runs:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: christosgalano/delete-workflows-runs@v1.0.0
-        with:
-          owner: ${{ github.repository_owner }}
-          repo: ${{ inputs.repo_name }}
-          token: ${{ secrets.WORKFLOWS_PAT }}
+### Delete the runs of a specific workflow
+
+```yaml
+- uses: christosgalano/delete-workflow-runs@v1.0.0
+  with:
+    owner: ${{ inputs.repository_owner }}
+    repo: ${{ inputs.repository_name }}
+    token: ${{ secrets.workflow_PAT }}
+    workflow: ${{ inputs.workflow_name }}
+```
+
+### Delete the runs of multiple workflows
+
+```yaml
+delete-runs:
+  runs-on: ubuntu-latest
+  strategy:
+    matrix:
+      workflow:
+        - workflow1
+        - workflow2
+        - workflow3
+  steps:
+    - uses: christosgalano/delete-workflow-runs@v1.0.0
+      with:
+        owner: ${{ inputs.repository_owner }}
+        repo: ${{ inputs.repository_name }}
+        token: ${{ secrets.workflow_PAT }}
+        workflow: ${{ matrix.workflow }}
 ```
