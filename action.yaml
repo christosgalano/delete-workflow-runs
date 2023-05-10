@@ -1,4 +1,4 @@
-name: "delete-workflow-runs"
+name: "Delete Workflows Runs"
 author: "Christos Galanopoulos"
 description: "Delete the workflow runs for a given repository"
 inputs:
@@ -10,6 +10,7 @@ inputs:
     required: true
   token:
     description: "Specify the token used to get and delete the workflow runs"
+    default: ${{ github.token }}}
     required: true
   workflow:
     description: "Specify the workflow name to delete the runs for"
