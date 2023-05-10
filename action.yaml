@@ -1,4 +1,4 @@
-name: "Delete Workflow Runs"
+name: "delete-workflow-runs"
 author: "Christos Galanopoulos"
 description: "Delete the workflow runs for a given repository"
 inputs:
