@@ -1,6 +1,6 @@
-name: "Delete Workflows' Runs"
+name: "Delete Workflow Runs"
 author: "Christos Galanopoulos"
-description: "Delete all the workflows' runs for a given repository"
+description: "Delete the workflow runs for a given repository"
 inputs:
   owner:
     description: "Specify the repository owner"
@@ -9,8 +9,12 @@ inputs:
     description: "Specify the repository name"
     required: true
   token:
-    description: "Specify the token used to get and delete the workflows' runs"
+    description: "Specify the token used to get and delete the workflow runs"
     required: true
+  workflow:
+    description: "Specify the workflow name to delete the runs for"
+    default: "all"
+    required: false
 branding:
   icon: delete
   color: gray-dark
@@ -22,8 +26,10 @@ runs:
         OWNER: ${{ inputs.owner }}
         REPO: ${{ inputs.repo }}
         TOKEN: ${{ inputs.token }}
+        WORKFLOW: ${{ inputs.workflow }}
       run: |
         ${{ github.action_path }}/delete_workflows_runs.sh \
           -o ${{ env.OWNER }} \
           -r ${{ env.REPO }} \
-          -t ${{ env.TOKEN }}
+          -t ${{ env.TOKEN }} \
+          -w ${{ env.WORKFLOW }}
