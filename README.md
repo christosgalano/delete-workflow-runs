@@ -33,7 +33,7 @@ jobs:
   delete-workflows-runs:
     runs-on: ubuntu-latest
     steps:
-      - uses: christosgalano/delete-workflow-runs@v1.0.0
+      - uses: christosgalano/delete-workflows-runs@v1.0.0
         with:
           owner: ${{ github.repository_owner }}
           repo: ${{ inputs.repo_name }}
