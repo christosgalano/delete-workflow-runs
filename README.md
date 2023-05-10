@@ -8,7 +8,7 @@ This action deletes the workflow runs for a given repository. You can delete the
 | --- | --- | --- | --- |
 | `owner` | Owner of the repository | true | |
 | `name` | Name of the repository | true | |
-| `token` | Token used to get and delete the workflow' runs | true | GITHUB_TOKEN |
+| `token` | Token used to get and delete the workflow' runs | true | `GITHUB_TOKEN` |
 | `workflow` | Name of the workflow to delete its runs | false | all |
 
 The `workflow` input is optional. If no value is provided or the value provided is "all", then all the runs of the repository will be deleted.
