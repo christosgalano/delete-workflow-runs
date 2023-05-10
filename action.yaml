@@ -1,15 +1,15 @@
-name: "Delete Workflow Runs"
+name: "Delete Workflows' Runs"
 author: "Christos Galanopoulos"
-description: "Delete all the workflows' runs in a repository"
+description: "Delete all the workflows' runs for a given repository"
 inputs:
   owner:
-    description: "Specify repository owner"
+    description: "Specify the repository owner"
     required: true
   repo:
-    description: "Specify repository"
+    description: "Specify the repository name"
     required: true
   token:
-    description: "Specify GitHub Personal Access Token"
+    description: "Specify the token used to get and delete the workflows' runs"
     required: true
 branding:
   icon: delete
